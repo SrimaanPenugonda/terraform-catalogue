@@ -17,7 +17,7 @@ resource "aws_lb_listener_rule" "catalogue" {
   }
   condition {
     host_header {
-      values          = ["${var.COMPONENT}-${var.ENV}-devopssri.ml"]
+      values          = ["${var.COMPONENT}-${var.ENV}.devopssri.ml"]
     }
   }
 }
