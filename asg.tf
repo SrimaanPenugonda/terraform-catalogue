@@ -17,8 +17,14 @@ resource "aws_lb_listener_rule" "catalogue" {
   }
   condition {
     host_header {
-      values          = ["catalogue-${var.ENV}-devopssri.ml"]
+      values          = ["${var.COMPONENT}-${var.ENV}-devopssri.ml"]
     }
   }
 }
-
+resource "aws_route53_record" "www" {
+  zone_id = "Z02790743IF4OLO4KMMFA"
+  name    = "${var.COMPONENT}-${var.ENV}-devopssri.ml"
+  type    = "A"
+  ttl     = "300"
+  records = [data.terraform_remote_state.alb.outputs.PRIVATE_ALB_DNS]
+}
